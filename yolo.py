@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+import os
 import subprocess
 import argparse
 import random
@@ -21,12 +22,15 @@ class Command(object):
         self.options = options
     def readjust_philisophy(self, args):
         return args
+    def readjust_environment(self):
+        return None
     def run(self, args):
         args.insert(0, self._cmd_)
         args = self.readjust_philisophy(args)
+        env = self.readjust_environment()
         if self.options.verbose:
             print " ".join(args)
-        subprocess.call(args)
+        subprocess.call(args, env=env)
 
 @register
 class Mercurial(Command):
