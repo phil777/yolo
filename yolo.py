@@ -29,6 +29,8 @@ class Command(object):
         args = self.readjust_philisophy(args)
         env = self.readjust_environment()
         if self.options.verbose:
+            if env:
+                print "ENV: %s" % (" ".join(["%s=%s"%(k,v) for (k,v) in env.iteritems()]),)
             print " ".join(args)
         subprocess.call(args, env=env)
 
