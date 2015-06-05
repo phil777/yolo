@@ -36,6 +36,15 @@ class Mercurial(Command):
             args = args[0:2]+["--insecure"]+args[2:]
         return args
 
+@register
+class WGet(Command):
+    _cmd_ = "wget"
+    def readjust_philisophy(self, args):
+        if len(args) > 0:
+            args.insert(1,"--no-check-certificate")
+        return args
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--verbose","-v", action="store_true")
