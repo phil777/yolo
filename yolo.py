@@ -48,6 +48,13 @@ class WGet(Command):
             args.insert(1,"--no-check-certificate")
         return args
 
+@register
+class Git(Command):
+    _cmd_ = "git"
+    def readjust_environment(self):
+        return {"GIT_SSL_NO_VERIFY":"true"}
+
+
 
 def main():
     parser = argparse.ArgumentParser()
